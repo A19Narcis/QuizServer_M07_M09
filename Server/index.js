@@ -1,6 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
@@ -17,18 +18,30 @@ app.use (cors({
 /*Get Preguntes*/
 app.post('/getPreguntes', (req, res) => {
     //Rep un numero (#num), el numero de preguntes que ha de recuperar
-    console.log(req.body);
-    fs.readFile('/quiz.json', (err, data) =>{
+    var ret = [];
+    fs.readFile(path.join(__dirname + '/quiz.json'), 'utf-8', function(err, data) {
         if (err) {
             return err;
         }
-        for (let index = 0; index < req.body; index++) {
-            console.log(data[index]);
-            
-        }
-    })
+        var dades = JSON.parse(data);
 
+        for (let index = 0; index < 1; index++) {
+            var questionArray = {};
+            questionArray.question = (dades.questions[index].question);
+            questionArray.options = [];
+
+            for (let posQuest = 0; posQuest < dades.questions[index].answers.length; posQuest++) {
+               questionArray.options.push(dades.questions[index].answers[posQuest]);
+
+            }
+            ret.push(questionArray);
+        }
+
+        res.json(ret);
+    });
 })
+
+
 
 app.post('/finalista', (req, res) => {
     //

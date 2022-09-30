@@ -1,7 +1,8 @@
 var app = new Vue({
     el: "#app",
     data: {
-        info: {num : 4}
+        info: {num : 4},
+        question: "",
     },
     vuetify: new Vuetify(),
     methods: {
@@ -22,11 +23,13 @@ var app = new Vue({
                 }
             ).then(
                 (response)=>{
-                    console.log(response);
+                    return(response.json());
                 }
             ).then(
                 (data) => {
                     console.log(data);
+                    var pregunta = JSON.stringify(data)
+                    this.question = pregunta
                 }
             ).catch(
                 (error) => {
