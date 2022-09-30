@@ -25,7 +25,7 @@ app.post('/getPreguntes', (req, res) => {
         }
         var dades = JSON.parse(data);
 
-        for (let index = 0; index < 1; index++) {
+        for (let index = 0; index < req.body.num; index++) {
             var questionArray = {};
             questionArray.question = (dades.questions[index].question);
             questionArray.options = [];
