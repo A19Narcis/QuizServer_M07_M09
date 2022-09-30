@@ -19,11 +19,16 @@
             Q U I Z
         </v-btn>
 
-        {{ question }} <br>
-        {{ opt1 }} <br>
-        {{ opt2 }} <br>
-        {{ opt3 }} <br>
-        {{ opt4 }} <br>
+        <ul>
+            <li v-for="(pregunta, index1) in preguntes">
+                {{ pregunta.question }}
+                <ul>
+                    <li v-for="(opcion, index2) in pregunta.options">
+                        {{index2}} - {{ opcion }} 
+                    </li>
+                </ul>
+            </li>
+        </ul>
 
     </v-app>
     <script src="index.js"></script>
