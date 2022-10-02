@@ -22,8 +22,10 @@
         <ul>
             <li v-for="(pregunta, index1) in preguntes">
                 {{ pregunta.question }}
-                <v-select :items="pregunta.options" label="Standard">
-                </v-select>
+                <v-radio-group v-model="radioGroup">
+                    <v-radio v-for="opcio in pregunta.options" :key="opcio" :label="`${opcio}`" :value="opcio"
+                    ></v-radio>
+                </v-radio-group>
             </li>
         </ul>
 
@@ -31,3 +33,9 @@
     <script src="index.js"></script>
 </body>
 </html>
+
+
+<!-- MODO SELECT
+<v-select :items="pregunta.options" label="Standard">
+</v-select>
+-->
