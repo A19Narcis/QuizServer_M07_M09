@@ -3,7 +3,8 @@ var app = new Vue({
     data: {
         info: {num : 4},
         preguntes: [],
-        isVisible: false
+        isVisible: false,
+        radioButtons: []
     },
     vuetify: new Vuetify(),
     methods: {
@@ -42,10 +43,30 @@ var app = new Vue({
             console.log("Getting selected options");
 
             var ele = document.getElementsByName('radioBTN');
-
-            console.log(ele.length);
             var selected = [];
+
+            ele.forEach((selBTN) => {
+                if (selBTN.checked) {
+                    console.log("ADD...");
+                    selected.push(selBTN);
+                }
+            })
+
             
+
+            /*
+            console.log("Num Q: " + this.preguntes.length);
+            for (let i = 0; i < this.preguntes.length; i++) {
+                console.log("Pregunta: " + (i+1));
+                for (let j = 0; j < this.preguntes[i].options.length; j++) {
+                    console.log(this.preguntes[i].options[j]);
+                    
+                }
+                console.log("\n");
+            }
+            */
+
+            /*
             for (let i = 0; i < ele.length; i++) {
                 console.log(ele[i].value);
                 if (ele[i].checked) {
@@ -55,11 +76,11 @@ var app = new Vue({
                     //document.getElementById("result").innerHTML = "Resposta: " + selected;
                 }
             }
+            */
 
             selected.forEach(function(entry){
                 console.log("- " + entry);
             })
-        }
+        },
     },
-    
 })
