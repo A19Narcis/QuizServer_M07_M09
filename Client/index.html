@@ -19,15 +19,25 @@
             Q U I Z
         </v-btn>
 
+
         <ul>
             <li v-for="(pregunta, index1) in preguntes">
                 {{ pregunta.question }}
                 <v-radio-group v-model="radioGroup">
-                    <v-radio v-for="opcio in pregunta.options" :key="opcio" :label="`${opcio}`" :value="opcio"
+                    <v-radio v-for="opcio in pregunta.options" name="radioBTN" :key="opcio" :label="`${opcio}`" :value="opcio"
                     ></v-radio>
                 </v-radio-group>
             </li>
         </ul>
+
+        <v-btn @click = "veureSelects" v-if = "isVisible">
+            SEND
+        </v-btn>
+
+
+        <div id = "result"></div>
+
+        
 
     </v-app>
     <script src="index.js"></script>
