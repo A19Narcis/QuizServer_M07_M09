@@ -1,7 +1,7 @@
 var app = new Vue({
     el: "#app",
     data: {
-        info: {num : 4},
+        info: {num : null},
         preguntes: [],
         isVisible: false,
         radioGroup: new Array(this.num),
@@ -13,6 +13,8 @@ var app = new Vue({
         getQuest: function () {
             console.log("Get data");
             this.isVisible = true;
+            this.info.num = document.getElementById("numQuestions").value;
+            console.log(this.info.num);
             const myHeaders = new Headers();
         
             fetch("http://localhost:3000/getPreguntes",

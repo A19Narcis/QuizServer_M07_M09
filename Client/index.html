@@ -15,10 +15,18 @@
 </head>
 <body>
     <v-app id = "app">
-        <v-btn @click = "getQuest" v-if = "!acabat">
+        <div>
+            <v-text-field
+            id = "numQuestions"
+            v-model="numQuest"
+            solo
+            label="Numero de preguntes"
+            clearable
+          ></v-text-field>
+          <v-btn @click = "getQuest" v-if = "!acabat">
             Q U I Z
         </v-btn>
-
+        </div>
 
         <ul>
             <li v-for="(pregunta, index1) in preguntes" v-if = "!acabat">
@@ -44,6 +52,9 @@
 
         <div id = "result" v-if = "acabat">
             <p>Respostes correctes: {{ solucions }}</p>
+            <v-btn onclick="window.location.reload();">
+                AGAIN
+            </v-btn>
         </div>
 
         
