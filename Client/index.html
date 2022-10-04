@@ -43,14 +43,28 @@
             </li>
         </ul>
 
-
         <v-btn @click = "veureSelects" v-if = "isVisible && !acabat">
             SEND
         </v-btn>
+        <v-snackbar v-model="snackbar">
+            {{ text }}
+
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                color="pink"
+                text
+                v-bind="attrs"
+                @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </template>
+            
+        </v-snackbar>
+        
 
 
         <div id = "result" v-if = "acabat">
-            <p>Respostes correctes: {{ solucions }}</p>
             <v-btn onclick="window.location.reload();">
                 AGAIN
             </v-btn>
