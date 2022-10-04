@@ -44,7 +44,22 @@ app.post('/getPreguntes', (req, res) => {
 
 
 app.post('/finalista', (req, res) => {
-    //
+    console.log(req.body);
+    fs.readFile(path.join(__dirname + '/quiz.json'), 'utf-8', function(err, data) {
+        if (err) {
+            return err;
+        }
+        var dades = JSON.parse(data);
+        var correctes = 0;
+
+        for (let i = 0; i < req.body.length; i++) {
+            if (dades.questions[i].correctIndex == req.body[i]){
+                correctes++;
+            }
+        }
+        res.json(correctes);
+
+    });
 })
 
 

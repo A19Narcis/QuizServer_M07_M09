@@ -23,8 +23,14 @@
         <ul>
             <li v-for="(pregunta, index1) in preguntes">
                 {{ pregunta.question }}
-                <v-radio-group v-model="radioGroup">
-                    <v-radio v-for="opcio in pregunta.options" name="radioBTN" :key="opcio" :label="`${opcio}`" :value="opcio"
+                <v-radio-group v-model="radioGroup[index1]">
+                    <v-radio 
+                    v-for="(opcio, index2) in pregunta.options" 
+                    name="radioBTN[]" 
+                    :key="opcio" 
+                    :label="`${opcio}`"
+                    :value="index2"
+                    :position="index2"
                     ></v-radio>
                 </v-radio-group>
             </li>
@@ -36,7 +42,9 @@
         </v-btn>
 
 
-        <div id = "result"></div>
+        <div id = "result">
+            <p>Respostes correctes: {{ solucions }}</p>
+        </div>
 
         
 
