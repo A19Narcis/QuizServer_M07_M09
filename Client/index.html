@@ -15,13 +15,13 @@
 </head>
 <body>
     <v-app id = "app">
-        <v-btn @click = "getQuest">
+        <v-btn @click = "getQuest" v-if = "!acabat">
             Q U I Z
         </v-btn>
 
 
         <ul>
-            <li v-for="(pregunta, index1) in preguntes">
+            <li v-for="(pregunta, index1) in preguntes" v-if = "!acabat">
                 {{ pregunta.question }}
                 <v-radio-group v-model="radioGroup[index1]">
                     <v-radio 
@@ -37,12 +37,12 @@
         </ul>
 
 
-        <v-btn @click = "veureSelects" v-if = "isVisible">
+        <v-btn @click = "veureSelects" v-if = "isVisible && !acabat">
             SEND
         </v-btn>
 
 
-        <div id = "result">
+        <div id = "result" v-if = "acabat">
             <p>Respostes correctes: {{ solucions }}</p>
         </div>
 

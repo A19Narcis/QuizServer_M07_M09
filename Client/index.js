@@ -6,6 +6,7 @@ var app = new Vue({
         isVisible: false,
         radioGroup: new Array(this.num),
         solucions: 0,
+        acabat: false
     },
     vuetify: new Vuetify(),
     methods: {
@@ -44,6 +45,7 @@ var app = new Vue({
             console.log("Get Resultats");
             console.log(this.radioGroup);
             const myHeaders = new Headers();
+            this.acabat = true;
         
             fetch("http://localhost:3000/finalista",
                 {
@@ -64,6 +66,7 @@ var app = new Vue({
                 (data) => {
                     this.solucions = data;
                     console.log(data);
+                    
                 }
             ).catch(
                 (error) => {
