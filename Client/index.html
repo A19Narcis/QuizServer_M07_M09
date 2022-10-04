@@ -15,15 +15,14 @@
 </head>
 <body>
     <v-app id = "app">
-        <div>
+        <div v-if = "start && !acabat">
             <v-text-field
             id = "numQuestions"
-            v-model="numQuest"
             solo
             label="Numero de preguntes"
             clearable
           ></v-text-field>
-          <v-btn @click = "getQuest" v-if = "!acabat">
+          <v-btn @click = "getQuest">
             Q U I Z
         </v-btn>
         </div>

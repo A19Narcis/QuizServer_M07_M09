@@ -6,13 +6,15 @@ var app = new Vue({
         isVisible: false,
         radioGroup: new Array(this.num),
         solucions: 0,
-        acabat: false
+        acabat: false,
+        start: true
     },
     vuetify: new Vuetify(),
     methods: {
         getQuest: function () {
             console.log("Get data");
             this.isVisible = true;
+            this.start = false;
             this.info.num = document.getElementById("numQuestions").value;
             console.log(this.info.num);
             const myHeaders = new Headers();
