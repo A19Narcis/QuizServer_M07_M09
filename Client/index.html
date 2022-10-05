@@ -52,8 +52,8 @@
                             </v-radio-group>
                         </li>
                     </ul>
-                    <v-btn width="100%" @click = "veureSelects" v-if = "isVisible && !acabat" onclick="window.setTimeout(function(){location.reload()}, 2500);">
-                        SEND
+                    <v-btn width="100%" @click = "veureSelects" v-if = "isVisible && !acabat">
+                        <v-text text-align = "center" onclick="window.setTimeout(function(){location.reload()}, 2500);">SEND</v-text>
                     </v-btn>
                 </v-col>
             </v-row>
@@ -72,11 +72,6 @@
             </v-row>
         </v-container>
 
-
-        
-        
-
-
         <v-snackbar v-model="snackbar" :timeout="timeout">
             {{ text }}
 
@@ -92,20 +87,8 @@
             </template>
             
         </v-snackbar>
-        
-
-
-        
-
-        
 
     </v-app>
     <script src="index.js"></script>
 </body>
 </html>
-
-
-<!-- MODO SELECT
-<v-select :items="pregunta.options" label="Standard">
-</v-select>
--->

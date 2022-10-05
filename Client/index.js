@@ -17,7 +17,6 @@ var app = new Vue({
     methods: {
         getQuest: function () {
             const myHeaders = new Headers();
-
             //Treure el numero de preguntes per validar el num de l'usuari
             fetch("http://localhost:3000/getNumPreguntes",
                 {
