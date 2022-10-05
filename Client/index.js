@@ -9,18 +9,16 @@ var app = new Vue({
         acabat: false,
         snackbar: false,
         text: "",
-        start: true
+        start: true,
+        numTotalPreguntes: 0
     },
     vuetify: new Vuetify(),
     methods: {
         getQuest: function () {
-            console.log("Get data");
-            this.isVisible = true;
-            this.start = false;
-            this.info.num = document.getElementById("numQuestions").value;
             const myHeaders = new Headers();
-        
-            fetch("http://localhost:3000/getPreguntes",
+
+            //Treure el numero de preguntes per validar el num de l'usuari
+            fetch("http://localhost:3000/getNumPreguntes",
                 {
                 method: "POST",
                 headers: {
@@ -36,8 +34,44 @@ var app = new Vue({
                     return(response.json());
                 }
             ).then(
-                (quiz) => {
-                    this.preguntes = quiz;
+                (data) => {
+                    this.info.num = document.getElementById("numQuestions").value;
+                    this.numTotalPreguntes = data;
+                    if (this.numTotalPreguntes < this.info.num) {
+                        console.log("No se puede");
+                    } else {
+                        console.log("Get data");
+                        if (this.info.num != "" && this.info.num > 0) {
+                            this.isVisible = true;
+                            this.start = false;
+                            fetch("http://localhost:3000/getPreguntes",
+                            {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept' : 'application/json',
+                            },
+                            mode: "cors",
+                            cache: "default",
+                            body: JSON.stringify(this.info)
+                            }
+                            ).then(
+                                (response)=>{
+                                    return(response.json());
+                                }
+                            ).then(
+                                (quiz) => {
+                                    this.preguntes = quiz;
+                                }
+                            ).catch(
+                                (error) => {
+                                    //console.log("Error: " + error)
+                                }
+                            );
+                        } else {
+                            console.log("No se puede");
+                        }
+                    }
                 }
             ).catch(
                 (error) => {
@@ -47,10 +81,18 @@ var app = new Vue({
         },
 
         veureSelects: function() {
+            var longRadioGroup = 0;
             if(this.radioGroup[0] == undefined){
                 this.radioGroup.length = 0;
             }
-            if (this.radioGroup.length == this.info.num/*this.radioGroup.length == this.info.num*/) {
+            for (let i = 0; i < this.radioGroup.length; i++) {
+                if (this.radioGroup[i] == null) {
+                    longRadioGroup--;
+                } else {
+                    longRadioGroup++;
+                } 
+            }
+            if (longRadioGroup == this.info.num) {
                 this.snackbar = true;
                 console.log("Get Resultats");
                 console.log(this.radioGroup);
@@ -76,7 +118,7 @@ var app = new Vue({
                     (data) => {
                         this.solucions = data;
                         console.log(data);
-                        this.text = "Resultat => " + this.solucions + "/" + this.info.num
+                        this.text = "Resultat -> " + this.solucions + "/" + this.info.num
                         
                     }
                 ).catch(

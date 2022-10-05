@@ -15,6 +15,25 @@ app.use (cors({
 }));
 
 
+/*Get Total Preguntes*/
+app.post('/getNumPreguntes', (req, res) => {
+    var totalNumQuest = 0;
+    fs.readFile(path.join(__dirname + '/quiz.json'), 'utf-8', function(err, data) {
+        if (err) {
+            return err;
+        }
+        var dades = JSON.parse(data);
+
+        for (let i = 0; i < dades.questions.length; i++) {
+            totalNumQuest++;
+        }
+        
+
+        res.json(totalNumQuest);
+    });
+}),
+
+
 /*Get Preguntes*/
 app.post('/getPreguntes', (req, res) => {
     //Rep un numero (#num), el numero de preguntes que ha de recuperar

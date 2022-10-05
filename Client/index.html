@@ -15,37 +15,68 @@
 </head>
 <body>
     <v-app id = "app">
-        <div v-if = "start && !acabat">
-            <v-text-field
-            id = "numQuestions"
-            solo
-            label="Numero de preguntes"
-            clearable
-          ></v-text-field>
-          <v-btn @click = "getQuest">
-            Q U I Z
-        </v-btn>
-        </div>
+        <v-container fill-height v-if = "start && !acabat" >
+            <v-row justify = "center" align-items = "center">
+                <v-col cols = "10" sm = "4">
+                    <v-text-field
+                    id = "numQuestions"
+                    solo
+                    label="Numero de preguntes (1-12)"
+                    clearable
+                  ></v-text-field>
+                  <v-sheet class = "mx-auto" align = "center">
+                    <v-btn @click = "getQuest" @click = "getTotalPreguntes">
+                        Q U I Z
+                    </v-btn>
+                  </v-sheet>
+                </v-col>
+            </v-row>
+            
+        </v-container>
 
-        <ul>
-            <li v-for="(pregunta, index1) in preguntes" v-if = "!acabat">
-                {{ pregunta.question }}
-                <v-radio-group v-model="radioGroup[index1]">
-                    <v-radio 
-                    v-for="(opcio, index2) in pregunta.options" 
-                    name="radioBTN[]" 
-                    :key="opcio" 
-                    :label="`${opcio}`"
-                    :value="index2"
-                    :position="index2"
-                    ></v-radio>
-                </v-radio-group>
-            </li>
-        </ul>
+        <v-container>
+            <v-row justify = "center" align-items = "center">
+                <v-col cols = "10" sm = "4">
+                    <ul>
+                        <li v-for="(pregunta, index1) in preguntes" v-if = "!acabat">
+                            {{ pregunta.question }}
+                            <v-radio-group v-model="radioGroup[index1]">
+                                <v-radio 
+                                v-for="(opcio, index2) in pregunta.options" 
+                                name="radioBTN[]" 
+                                :key="opcio" 
+                                :label="`${opcio}`"
+                                :value="index2"
+                                :position="index2"
+                                ></v-radio>
+                            </v-radio-group>
+                        </li>
+                    </ul>
+                    <v-btn width="100%" @click = "veureSelects" v-if = "isVisible && !acabat">
+                        SEND
+                    </v-btn>
+                </v-col>
+            </v-row>
+        </v-container>
 
-        <v-btn @click = "veureSelects" v-if = "isVisible && !acabat">
-            SEND
-        </v-btn>
+        <v-container fill-height>
+            <v-row justify = "center" align-items = "center">
+                <v-col cols = "10" sm = "4">
+                    <v-sheet class = "mx-auto" align = "center">
+                        <v-btn width="100%" id = "result" v-if = "acabat" onclick="window.location.reload();">
+                            AGAIN
+                        </v-btn>
+                    </v-sheet>
+                    
+                </v-col>
+            </v-row>
+        </v-container>
+
+
+        
+        
+
+
         <v-snackbar v-model="snackbar">
             {{ text }}
 
@@ -64,11 +95,7 @@
         
 
 
-        <div id = "result" v-if = "acabat">
-            <v-btn onclick="window.location.reload();">
-                AGAIN
-            </v-btn>
-        </div>
+        
 
         
 
