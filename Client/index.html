@@ -52,7 +52,7 @@
                             </v-radio-group>
                         </li>
                     </ul>
-                    <v-btn width="100%" @click = "veureSelects" v-if = "isVisible && !acabat">
+                    <v-btn width="100%" @click = "veureSelects" v-if = "isVisible && !acabat" onclick="window.setTimeout(function(){location.reload()}, 2500);">
                         SEND
                     </v-btn>
                 </v-col>
@@ -63,8 +63,8 @@
             <v-row justify = "center" align-items = "center">
                 <v-col cols = "10" sm = "4">
                     <v-sheet class = "mx-auto" align = "center">
-                        <v-btn width="100%" id = "result" v-if = "acabat" onclick="window.location.reload();">
-                            AGAIN
+                        <v-btn width="100%" id = "result" v-if = "acabat">
+                            GRÀCIES PER FER EL QUIZ :)
                         </v-btn>
                     </v-sheet>
                     
@@ -77,7 +77,7 @@
         
 
 
-        <v-snackbar v-model="snackbar">
+        <v-snackbar v-model="snackbar" :timeout="timeout">
             {{ text }}
 
             <template v-slot:action="{ attrs }">
@@ -86,8 +86,8 @@
                 text
                 v-bind="attrs"
                 @click="snackbar = false"
+                
               >
-                Close
               </v-btn>
             </template>
             

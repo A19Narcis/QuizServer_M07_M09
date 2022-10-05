@@ -10,7 +10,8 @@ var app = new Vue({
         snackbar: false,
         text: "",
         start: true,
-        numTotalPreguntes: 0
+        numTotalPreguntes: 0,
+        timeout: 2000
     },
     vuetify: new Vuetify(),
     methods: {
