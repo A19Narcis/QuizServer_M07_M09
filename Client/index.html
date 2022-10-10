@@ -23,6 +23,7 @@
                     solo
                     label="Numero de preguntes (1-12)"
                     clearable
+                    autocomplete = "off"
                   ></v-text-field>
                   <v-sheet class = "mx-auto" align = "center">
                     <v-btn @click = "getQuest" @click = "getTotalPreguntes">
@@ -38,7 +39,7 @@
             <v-row justify = "center" align-items = "center">
                 <v-col cols = "10" sm = "4">
                     <ul>
-                        <li v-for="(pregunta, index1) in preguntes" v-if = "!acabat">
+                        <li v-for="(pregunta, index1) in preguntes" v-if = "!acabat && !start">
                             {{ pregunta.question }}
                             <v-radio-group v-model="radioGroup[index1]">
                                 <v-radio 
@@ -53,7 +54,7 @@
                         </li>
                     </ul>
                     <v-btn width="100%" @click = "veureSelects" v-if = "isVisible && !acabat">
-                        <v-text text-align = "center" onclick="window.setTimeout(function(){location.reload()}, 2500);">SEND</v-text>
+                        <v-text text-align = "center">SEND</v-text>
                     </v-btn>
                 </v-col>
             </v-row>

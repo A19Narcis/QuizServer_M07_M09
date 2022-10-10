@@ -11,9 +11,19 @@ var app = new Vue({
         text: "",
         start: true,
         numTotalPreguntes: 0,
-        timeout: 2000
+        timeout: 1500
     },
     vuetify: new Vuetify(),
+    watch: {
+        snackbar(oldsnackbar, newsnackbar){
+            if(newsnackbar){
+                this.start = true;
+                this.acabat = false;
+                this.isVisible = false;
+                this.radioGroup = new Array(this.num)
+            }
+        }
+    },
     methods: {
         getQuest: function () {
             const myHeaders = new Headers();
@@ -118,7 +128,7 @@ var app = new Vue({
                     (data) => {
                         this.solucions = data;
                         console.log(data);
-                        this.text = "Resultat -> " + this.solucions + "/" + this.info.num
+                        this.text = "Resultat: " + this.solucions + "/" + this.info.num
                         
                     }
                 ).catch(
