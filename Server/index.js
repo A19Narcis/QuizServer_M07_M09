@@ -38,6 +38,10 @@ app.use(session({
     secret: '12345678',
     resave: true,
     saveUninitialized: true,
+    cookie: {
+        maxAge: 60000,
+        secure: false
+      }
 }));
 
 
