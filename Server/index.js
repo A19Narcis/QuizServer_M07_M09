@@ -24,6 +24,21 @@ app.use(session({
     }
 }));
 
+var numeroNoRepetit = function(arrayQuestions){
+    var valorMax = 12;
+    do {
+        var esRepetit = false;
+        var randomNum = Math.floor(Math.random() * valorMax);
+        for (let i = 0; i < arrayQuestions.length; i++){
+            if(arrayQuestions[i] == randomNum){
+                esRepetit = true;
+            }                       
+        }
+    } while (esRepetit);
+    return randomNum;
+};
+
+
 
 /*Get Total Preguntes*/
 app.post('/getNumPreguntes', (req, res) => {
@@ -40,14 +55,6 @@ app.post('/getNumPreguntes', (req, res) => {
         res.json(totalNumQuest);
     });
 }),
-
-//FUNCION (array, numeroMAX)
-/*
-
-do while if repetit is true
-
-RETORNA NUMERO
-*/
 
 
 /*Get Preguntes*/
@@ -66,13 +73,14 @@ app.post('/getPreguntes', (req, res) => {
 
         for (let index = 0; index < req.body.num; index++) {
             var questionArray = {};
-            var randomNum = Math.floor(Math.random() * 12); //Funcio per validar el numero
-            req.session.cookie.preguntes.push(randomNum);
-            questionArray.question = (dades.questions[randomNum].question);
+            //Funcio per validar el numero
+            var numRandomEscollit = numeroNoRepetit(req.session.cookie.preguntes);
+            req.session.cookie.preguntes.push(numRandomEscollit);
+            questionArray.question = (dades.questions[numRandomEscollit].question);
             questionArray.options = [];
 
-            for (let posQuest = 0; posQuest < dades.questions[randomNum].answers.length; posQuest++) {
-               questionArray.options.push(dades.questions[randomNum].answers[posQuest]);
+            for (let posQuest = 0; posQuest < dades.questions[numRandomEscollit].answers.length; posQuest++) {
+               questionArray.options.push(dades.questions[numRandomEscollit].answers[posQuest]);
 
             }
             ret.push(questionArray);
