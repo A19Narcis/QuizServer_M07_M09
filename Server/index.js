@@ -15,6 +15,7 @@ app.use (cors({
     }
 }));
 
+
 app.use(session({
     secret: '12345678',
     saveUninitialized: true,
@@ -24,6 +25,8 @@ app.use(session({
     }
 }));
 
+
+//Validacio de que la pregunta no es repeteixi
 var numeroNoRepetit = function(arrayQuestions){
     var valorMax = 12;
     do {
@@ -37,7 +40,6 @@ var numeroNoRepetit = function(arrayQuestions){
     } while (esRepetit);
     return randomNum;
 };
-
 
 
 /*Get Total Preguntes*/
@@ -92,6 +94,7 @@ app.post('/getPreguntes', (req, res) => {
 })
 
 
+//Resultats del QUIZ
 app.post('/finalista', (req, res,) => {
     console.log("Respostes usuari: [" + req.body + "]");
     fs.readFile(path.join(__dirname + '/quiz.json'), 'utf-8', function(err, data) {
